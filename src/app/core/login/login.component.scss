@@ -1,0 +1,32 @@
+.login-page > div {
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.login-header {
+  background-color: #2fc097;
+  padding: 5px;
+}
+
+.login-content {
+  padding-top: 100px;
+  display: flex;
+  align-items: center;
+
+  p, .project-name { color: #fff; }
+
+  .login-form {
+    padding: 10px 50px;
+    background-color: #2fc097;
+    min-width: 300px;
+  }
+}
+
+.login-footer {
+  background-color: #eaeaea;
+  position: fixed;
+  bottom: 0;
+  display: block;
+  width: 100%;
+}

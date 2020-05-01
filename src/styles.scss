@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+
+  i {
+    position: absolute;
+    padding-left: 10px;
+  }
+
+  input {
+    padding-left: 30px;
+  }
+}
+
+// Your variable overrides
+$primary: #24a87b;
+
+$font-family-sans-serif:
+  'Avenir',
+  'Font Awesome 5 Pro',
+  // Safari for OS X and iOS (San Francisco)
+  -apple-system,
+  // Chrome < 56 for OS X (San Francisco)
+  BlinkMacSystemFont,
+  // Windows
+  "Segoe UI",
+  // Android
+  "Roboto",
+  // Basic web fallback
+  "Helvetica Neue", Arial, sans-serif,
+  // Emoji fonts
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+// Bootstrap and its default variables
+@import "node_modules/bootstrap/scss/bootstrap";
+
+$fa-font-path : "~@fortawesome/fontawesome-pro/webfonts";
+@import "~@fortawesome/fontawesome-pro/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-pro/scss/regular.scss";
