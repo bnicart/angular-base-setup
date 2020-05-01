@@ -5,14 +5,15 @@ import {
   Router,
   RouterStateSnapshot
 } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const can = [true, false][Math.round(Math.random()*1)];
+    const can = this.authService.isAuthenticated();
 
     if (!can) {
       this.router.navigate(['login']);

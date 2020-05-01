@@ -22,11 +22,20 @@ export class AuthService {
   }
 
   isAuthenticated(token: string = null): boolean {
-    token = token || this.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
+    try {
+      token = token || this.getItem('token');
+      return !this.jwtHelper.isTokenExpired(token);
+    } catch {
+      this.setToken('');
+      this.router.navigate(['/login']);
+    }
   }
 
   decodeToken(token: string): {} {
     return this.jwtHelper.decodeToken(token);
+  }
+
+  getExpiration(): Date {
+    return this.jwtHelper.getTokenExpirationDate(this.getItem('token'));
   }
 }

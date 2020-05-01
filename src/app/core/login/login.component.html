@@ -7,20 +7,22 @@
   </div>
 
   <div class="login-content">
-    <form class="login-form">
+    <form name="loginForm" class="login-form" (submit)="login()">
       <h1 class="h3 mb-3 font-weight-normal text-center project-name">Project X</h1>
 
       <div class="input-with-icon">
         <i class="fas fa-user"></i>
-        <input type="text" name="username" class="form-control" placeholder="username" required autofocus>
+        <input type="text" name="username" [(ngModel)]="loginDetails.username" class="form-control" placeholder="username" required autofocus>
       </div>
 
       <div class="input-with-icon">
         <i class="fas fa-lock"></i>
-        <input type="password" name="password" class="form-control" placeholder="password" required>
+        <input type="password" name="password" [(ngModel)]="loginDetails.password" class="form-control" placeholder="password" required>
       </div>
 
-      <button class="btn btn-lg btn-primary btn-block mt-3 mb-3" type="submit">Login</button>
+      <button class="btn btn-lg btn-primary btn-block mt-3 mb-3" type="submit" [class.with-loading]="loading">
+        Login
+      </button>
 
       <p class="text-center">
         <a href="#" class="text-white">Forgot your password?</a>

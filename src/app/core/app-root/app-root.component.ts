@@ -10,5 +10,7 @@ export class AppRootComponent implements OnInit {
 
   constructor(public router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log('Logged In!');
+  }
 }
