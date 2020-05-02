@@ -17,6 +17,26 @@ const routes: Routes = [
       //   loadChildren: () =>
       //     import('../component/component.module').then(m => m.ComponentModule)
       // }
+      {
+        path: 'data',
+        loadChildren: () =>
+          import('../pages/data/data.module').then(m => m.DataModule)
+      },
+      {
+        path: 'flows',
+        loadChildren: () =>
+          import('../pages/flows/flows.module').then(m => m.FlowsModule)
+      },
+      {
+        path: 'forms',
+        loadChildren: () =>
+          import('../pages/forms/forms.module').then(m => m.FormsModule)
+      },
+      {
+        path: 'templates',
+        loadChildren: () =>
+          import('../pages/templates/templates.module').then(m => m.TemplatesModule)
+      }
     ]
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
