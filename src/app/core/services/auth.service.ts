@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { LoggedInUserDetails } from '../models/logged-in-user-details.model';
 
 @Injectable()
 export class AuthService {
@@ -12,8 +13,18 @@ export class AuthService {
     return localStorage.getItem(itemName);
   }
 
+  setItem(key: string, value: string): void {
+    localStorage.setItem(key, value);
+  }
+
   setToken(token: string): void {
-    localStorage.setItem('token', token);
+    if (token) {
+      localStorage.setItem('token', token);
+      this.setOtherData(); // Used for setting other custom local storage data.
+    } else {
+      localStorage.clear();
+    }
+
   }
 
   logout(): void {
@@ -37,5 +48,11 @@ export class AuthService {
 
   getExpiration(): Date {
     return this.jwtHelper.getTokenExpirationDate(this.getItem('token'));
+  }
+
+  setOtherData(): void {
+    const data = this.getDecodeToken() as LoggedInUserDetails;
+    console.log(data);
+    this.setItem('current_organisation', JSON.stringify(data.current_organisation))
   }
 }
