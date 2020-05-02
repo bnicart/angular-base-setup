@@ -1,14 +1,35 @@
 <div class="navbar">
   <div class="d-flex">
     <div class="dropdown mr-1">
-      <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
-        {{ userDetails.currentOrganisationName }}
+      <button type="button" class="btn btn-secondary dropdown-toggle" id="organisation-options-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
+        {{ userDetails.current_organisation.name }}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-        <a class="dropdown-item" href="#">{{ userDetails.currentOrganisationName }}</a>
+        <a class="dropdown-item pl-3 pr-5" href="#">
+          <img [src]="getCurrentOrganisationLogo(userDetails.current_organisation)" [alt]="getCurrentOrganisationLogo(userDetails.current_organisation)" class="img-thumbnail mr-1">
+          <span class="pr-3">{{ userDetails.current_organisation.name }}</span>
+        </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" href="#" *ngFor="let team of userDetails.teams">
+
+          <div class="with-icon">
+            <i class="fa fa-users text-primary"></i>
+            <span class="d-inline-block">
+              {{ team.name }}
+            </span>
+          </div>
+        </a>
+        <a class="dropdown-item" href="#">
+          <div class="with-icon">
+            <i class="fa fa-plus-square text-primary"></i>
+            <span class="d-inline-block">
+              Add a new team
+            </span>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Organisation Settings</a>
+        <a class="dropdown-item" href="#">Settings</a>
       </div>
     </div>
   </div>
@@ -25,9 +46,9 @@
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#" *ngFor="let organisation of userDetails.organisations">
         <div class="with-icon">
-          <i class="fas"
-            [class.fa-check-square]="organisation.id === userDetails.current_organisation_id"
-            [class.fa-square]="organisation.id !== userDetails.current_organisation_id"
+          <i class="fas text-primary"
+            [class.fa-check-square]="organisation.id === userDetails.current_organisation.id"
+            [class.fa-square]="organisation.id !== userDetails.current_organisation.id"
           ></i>
           <div class="d-inline-block">{{ organisation.name }}</div>
         </div>

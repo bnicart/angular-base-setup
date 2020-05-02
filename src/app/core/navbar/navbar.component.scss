@@ -1,4 +1,13 @@
 
+#organisation-options-dropdown {
+  background-color: transparent;
+  border: none;
+
+  &::after {
+    content: none;
+  }
+}
+
 #user-options-dropdown {
   border-radius: 50%;
   background-color: rgba(255,255,255,0.5);

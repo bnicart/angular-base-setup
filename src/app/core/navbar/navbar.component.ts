@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { LoggedInUserDetails } from '../models/logged-in-user-details.model';
+import { LoggedInUserDetails, Organisation } from '../models/logged-in-user-details.model';
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +13,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDetails = this.authService.getDecodeToken() as LoggedInUserDetails;
+  }
+
+  getCurrentOrganisationLogo(organisation: Organisation): string {
+    const logoUrl: string = organisation.logo || 'assets/images/placeholder-logo.png';
+    return logoUrl;
   }
 
   logout(): void {
