@@ -22,3 +22,9 @@
   background-color: var(--primary-bg-color);
   min-height: 50px;
 }
+
+.nav-items {
+  &.active {
+    border-bottom: 1px solid #fff;
+  }
+}
