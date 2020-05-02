@@ -10,6 +10,8 @@ export interface LoggedInUserDetails {
   current_organisation: Organisation;
   organisations: Array<Organisation>;
   teams: Array<Team>;
+  password?: string;
+  confirm_password?: string;
 }
 
 export interface Team {
