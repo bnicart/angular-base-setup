@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgpSortModule } from 'ngp-sort-pipe';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { CoreRoutingModule } from './core-routing.module';
 
@@ -30,7 +31,8 @@ import { HttpErrorInterceptor } from './services/http-error.interceptor';
 
     // Plugins
     FontAwesomeModule,
-    NgpSortModule
+    NgpSortModule,
+    LoadingBarHttpClientModule
   ],
   exports: [
     RouterModule,
