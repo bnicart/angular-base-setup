@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   envName: 'production',
-  apiUrl: ''
+  apiUrl: 'https://evening-falls-53968.herokuapp.com'
 };
