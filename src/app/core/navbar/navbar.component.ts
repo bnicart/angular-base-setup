@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/custom/user.service';
+
 import { LoggedInUserDetails, Organisation } from '../models/logged-in-user-details.model';
 
 @Component({
@@ -9,15 +11,39 @@ import { LoggedInUserDetails, Organisation } from '../models/logged-in-user-deta
 })
 export class NavbarComponent implements OnInit {
   userDetails: LoggedInUserDetails;
-  constructor(private authService: AuthService) { }
+  loading: boolean = false;
+
+  constructor(private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userDetails = this.authService.getDecodeToken() as LoggedInUserDetails;
+    const details = this.authService.getItem('user_details');
+    if (details) {
+      this.setUserDetails(JSON.parse(details));
+    } else {
+      this.setUserDetails(this.authService.getDecodeToken() as LoggedInUserDetails);
+    }
+  }
+
+  setUserDetails(value: LoggedInUserDetails): void {
+    this.userDetails = value;
+    this.authService.setItem('user_details', JSON.stringify(this.userDetails));
   }
 
   getCurrentOrganisationLogo(organisation: Organisation): string {
     const logoUrl: string = organisation.logo || 'assets/images/placeholder-logo.png';
     return logoUrl;
+  }
+
+  swithOrganisation(organisation: Organisation): void {
+    this.loading = true;
+    this.userService.update(this.userDetails.id, { current_organisation_id: organisation.id })
+    .subscribe((response: LoggedInUserDetails) => {
+      this.loading = false;
+      this.setUserDetails(response);
+    }, (error) => {
+      alert(error);
+      this.loading = false;
+    })
   }
 
   logout(): void {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginService } from './login.service';
-import { LoginDetail, LoginReponse } from './login.model';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/custom/user.service';
+import { LoginDetail, LoginReponse } from './login.model';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private loginService: LoginService,
+    private userService: UserService,
     private authService: AuthService,
     private router: Router) { }
 
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.loading = true;
-    this.loginService.authenticate(this.loginDetails).subscribe((response: LoginReponse) => {
+    this.userService.authenticate(this.loginDetails).subscribe((response: LoginReponse) => {
       this.authService.setToken(response.token);
       this.loading = false;
       this.router.navigate(['/data']);

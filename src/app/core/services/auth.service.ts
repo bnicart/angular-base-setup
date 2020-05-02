@@ -20,11 +20,9 @@ export class AuthService {
   setToken(token: string): void {
     if (token) {
       localStorage.setItem('token', token);
-      this.setOtherData(); // Used for setting other custom local storage data.
     } else {
       localStorage.clear();
     }
-
   }
 
   logout(): void {
@@ -48,11 +46,5 @@ export class AuthService {
 
   getExpiration(): Date {
     return this.jwtHelper.getTokenExpirationDate(this.getItem('token'));
-  }
-
-  setOtherData(): void {
-    const data = this.getDecodeToken() as LoggedInUserDetails;
-    console.log(data);
-    this.setItem('current_organisation', JSON.stringify(data.current_organisation))
   }
 }

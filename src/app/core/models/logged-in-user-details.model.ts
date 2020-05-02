@@ -1,9 +1,13 @@
 export interface LoggedInUserDetails {
+  id: string;
   name: string;
   initials: string;
+  email: string;
+  username: string;
+  photo: string;
   current_organisation: Organisation;
-  teams: Array<Team>;
   organisations: Array<Organisation>;
+  teams: Array<Team>;
 }
 
 export interface Team {
