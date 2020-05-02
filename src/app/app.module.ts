@@ -4,7 +4,6 @@ import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -12,8 +11,7 @@ import { PagesModule } from './pages/pages.module';
   ],
   imports: [
     BrowserModule,
-    CoreModule,
-    PagesModule
+    CoreModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

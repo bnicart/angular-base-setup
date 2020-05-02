@@ -1,1 +1,37 @@
-<h3>Profile Page</h3>
+<form #userProfileForm="ngForm" class="user-profile-form" (submit)="save()">
+  <h3>Profile</h3>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" name="firstName" #firstName="ngModel" [(ngModel)]="userDetails.first_name" [class.is-invalid]="firstName.invalid" required>
+      <div class="invalid-feedback">Please provide First Name.</div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" name="lastName" #lastName="ngModel" [(ngModel)]="userDetails.last_name" [class.is-invalid]="lastName.invalid" required>
+      <div class="invalid-feedback">Please provide Last Name.</div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="email" #email="ngModel" [(ngModel)]="userDetails.email" [class.is-invalid]="email.invalid" required>
+      <div class="invalid-feedback">Please provide Email.</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" name="username" #username="ngModel" [(ngModel)]="userDetails.username" [class.is-invalid]="username.invalid" required>
+      <div class="invalid-feedback">Please provide Username.</div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="userDetails.password" (changed)="confirmPassword.value = ''">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" class="form-control" name="confirmPassword" #confirmPassword="ngModel" [(ngModel)]="userDetails.confirm_password" [class.is-invalid]="password.value && password.value != confirmPassword.value" [required]="password.value">
+      <div class="invalid-feedback">Please make sure your passwords match.</div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary float-right" [disabled]="userProfileForm.pristine || userProfileForm.invalid || (password.value && password.value != confirmPassword.value) || loading" [class.with-loading]="loading">Save</button>
+</form>

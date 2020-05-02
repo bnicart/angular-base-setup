@@ -1,5 +1,7 @@
 export interface LoggedInUserDetails {
   id: string;
+  first_name: string;
+  last_name: string;
   name: string;
   initials: string;
   email: string;

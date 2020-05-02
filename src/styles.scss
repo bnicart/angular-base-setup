@@ -58,7 +58,7 @@ $font-family-sans-serif:
 
 .with-loading {
   &:before {
-    @extend .fa, .fa-spin;
+    @extend .fa, .fa-spin, .fa-pulse;
     content: "\f110";
   }
 }
