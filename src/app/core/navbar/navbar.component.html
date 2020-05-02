@@ -1,16 +1,16 @@
 <div class="navbar">
   <div class="d-flex">
     <div class="dropdown mr-1">
-      <button type="button" class="organisation-options-dropdown-button btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
+      <button type="button" class="organisation-options-dropdown-button btn btn-primary btn-block dropdown-toggle" id="organisationOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
         {{ userDetails.current_organisation.name }}
       </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+      <div class="dropdown-menu mt-3" aria-labelledby="organisationOptions">
         <a class="dropdown-item pl-3 pr-5 d-flex align-items-center" href="#">
           <img class="current-organisation-logo img-thumbnail mr-1" [src]="getCurrentOrganisationLogo(userDetails.current_organisation)" [alt]="getCurrentOrganisationLogo(userDetails.current_organisation)">
           <div class="current-organisation-name">{{ userDetails.current_organisation.name }}</div>
         </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" *ngFor="let team of userDetails.teams">
+        <a class="dropdown-item" href="#" *ngFor="let team of userDetails.teams | sortBy:'name'">
 
           <div class="with-icon">
             <i class="fa fa-users text-primary"></i>
@@ -51,17 +51,17 @@
     </ul>
   </div>
 
-  <div class="dropdown">
-    <button type="button" class="btn btn-secondary dropdown-toggle" id="user-options-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
+  <div class="dropdown ml-auto">
+    <button type="button" class="user-options-dropdown-button btn btn-secondary dropdown-toggle" id="userOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
       {{ userDetails.initials }}
     </button>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuOffset">
+    <div class="dropdown-menu mt-3 dropdown-menu-right" aria-labelledby="userOptions">
       <a class="dropdown-item font-weight-bold" href="#">{{ userDetails.name }}</a>
       <a class="dropdown-item text-black-50" href="#">
         Edit profile
       </a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#" *ngFor="let organisation of userDetails.organisations">
+      <a class="dropdown-item" href="#" *ngFor="let organisation of userDetails.organisations | sortBy:'name'">
         <div class="with-icon">
           <i class="fas text-primary"
             [class.fa-check-square]="organisation.id === userDetails.current_organisation.id"

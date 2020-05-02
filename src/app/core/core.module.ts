@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgpSortModule } from 'ngp-sort-pipe';
 
 import { CoreRoutingModule } from './core-routing.module';
 
@@ -28,7 +29,8 @@ import { HttpErrorInterceptor } from './services/http-error.interceptor';
     CoreRoutingModule,
 
     // Plugins
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgpSortModule
   ],
   exports: [
     RouterModule,
