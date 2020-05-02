@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/data']);
     }
   }
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.loginService.authenticate(this.loginDetails).subscribe((response: LoginReponse) => {
       this.authService.setToken(response.token);
       this.loading = false;
-      this.router.navigate(['/']);
+      this.router.navigate(['/data']);
     }, (error) => {
       this.loading = false;
       this.authService.setToken('');

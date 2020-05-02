@@ -1,12 +1,24 @@
 
-#organisation-options-dropdown {
-  background-color: transparent;
+.organisation-options-dropdown-button {
   border: none;
 
   &::after {
     content: none;
   }
+
+  & + .dropdown-menu {
+    max-width: 250px;
+
+    .current-organisation-name {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
+
+
 
 #user-options-dropdown {
   border-radius: 50%;

@@ -1,13 +1,13 @@
 <div class="navbar">
   <div class="d-flex">
     <div class="dropdown mr-1">
-      <button type="button" class="btn btn-secondary dropdown-toggle" id="organisation-options-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
+      <button type="button" class="organisation-options-dropdown-button btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
         {{ userDetails.current_organisation.name }}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-        <a class="dropdown-item pl-3 pr-5" href="#">
-          <img [src]="getCurrentOrganisationLogo(userDetails.current_organisation)" [alt]="getCurrentOrganisationLogo(userDetails.current_organisation)" class="img-thumbnail mr-1">
-          <span class="pr-3">{{ userDetails.current_organisation.name }}</span>
+        <a class="dropdown-item pl-3 pr-5 d-flex align-items-center" href="#">
+          <img class="current-organisation-logo img-thumbnail mr-1" [src]="getCurrentOrganisationLogo(userDetails.current_organisation)" [alt]="getCurrentOrganisationLogo(userDetails.current_organisation)">
+          <div class="current-organisation-name">{{ userDetails.current_organisation.name }}</div>
         </a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#" *ngFor="let team of userDetails.teams">
