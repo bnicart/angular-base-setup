@@ -12,5 +12,6 @@ export class AppRootComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Logged In!');
+    this.router.navigate(['/data']);
   }
 }
