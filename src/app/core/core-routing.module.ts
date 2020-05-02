@@ -36,7 +36,18 @@ const routes: Routes = [
         path: 'templates',
         loadChildren: () =>
           import('../pages/templates/templates.module').then(m => m.TemplatesModule)
-      }
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('../pages/profile/profile.module').then(m => m.ProfileModule)
+      },
+      {
+        path: 'organisation-settings',
+        loadChildren: () =>
+          import('../pages/organisation-settings/organisation-settings.module').then(m => m.OrganisationSettingsModule)
+      },
+      { path: '', redirectTo: '/data', pathMatch: 'full' }
     ]
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
