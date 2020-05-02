@@ -47,6 +47,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../pages/organisation-settings/organisation-settings.module').then(m => m.OrganisationSettingsModule)
       },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('../pages/settings/settings.module').then(m => m.SettingsModule)
+      },
       { path: '', redirectTo: '/data', pathMatch: 'full' }
     ]
   },
