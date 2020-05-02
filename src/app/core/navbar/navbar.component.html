@@ -1,0 +1,42 @@
+<div class="navbar">
+  <div class="d-flex">
+    <div class="dropdown mr-1">
+      <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+        {{ userDetails.currentOrganisationName }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+        <a class="dropdown-item" href="#">{{ userDetails.currentOrganisationName }}</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button type="button" class="btn btn-secondary dropdown-toggle" id="user-options-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,50">
+      {{ userDetails.initials }}
+    </button>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuOffset">
+      <a class="dropdown-item font-weight-bold" href="#">{{ userDetails.name }}</a>
+      <a class="dropdown-item text-black-50" href="#">
+        Edit profile
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#" *ngFor="let organisation of userDetails.organisations">
+        <div class="with-icon">
+          <i class="fas"
+            [class.fa-check-square]="organisation.id === userDetails.current_organisation_id"
+            [class.fa-square]="organisation.id !== userDetails.current_organisation_id"
+          ></i>
+          <div class="d-inline-block">{{ organisation.name }}</div>
+        </div>
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#" (click)="logout()">
+        <i class="fas fa-sign-out"></i>
+        Logout
+      </a>
+    </div>
+  </div>
+</div>

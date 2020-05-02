@@ -1,28 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-
-.input-with-icon {
-  display: flex;
-  align-items: center;
-
-  i {
-    position: absolute;
-    padding-left: 10px;
-  }
-
-  input {
-    padding-left: 30px;
-  }
-}
-
-.with-loading {
-  &:before {
-    @extend .fa, .fa-spin;
-    content: "\f110";
-  }
-}
+$fa-font-path : "~@fortawesome/fontawesome-pro/webfonts";
+@import "~@fortawesome/fontawesome-pro/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-pro/scss/regular.scss";
 
 // Your variable overrides
 $primary: #24a87b;
+
+:root {
+  --primary-bg-color: #2fc097;
+}
 
 $font-family-sans-serif:
   'Avenir',
@@ -43,6 +28,36 @@ $font-family-sans-serif:
 // Bootstrap and its default variables
 @import "node_modules/bootstrap/scss/bootstrap";
 
-$fa-font-path : "~@fortawesome/fontawesome-pro/webfonts";
-@import "~@fortawesome/fontawesome-pro/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-pro/scss/regular.scss";
+.input-with-icon {
+  display: flex;
+  align-items: center;
+
+  i {
+    position: absolute;
+    padding-left: 10px;
+  }
+
+  input {
+    padding-left: 30px;
+  }
+}
+
+.with-icon {
+  display: flex;
+  align-items: center;
+
+  i {
+    position: absolute;
+  }
+
+  i + * {
+    padding-left: 30px;
+  }
+}
+
+.with-loading {
+  &:before {
+    @extend .fa, .fa-spin;
+    content: "\f110";
+  }
+}

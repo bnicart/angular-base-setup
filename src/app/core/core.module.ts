@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
+import { HttpErrorInterceptor } from './services/http-error.interceptor';
 
 @NgModule({
   imports: [
@@ -41,7 +42,12 @@ import { AuthGuard } from './services/auth.guard';
   ],
   providers: [
     AuthGuard,
-    AuthService
+    AuthService,
+    {
+     provide: HTTP_INTERCEPTORS,
+     useClass: HttpErrorInterceptor,
+     multi: true
+   }
   ]
 })
 export class CoreModule { }

@@ -21,9 +21,9 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  isAuthenticated(token: string = null): boolean {
+  isAuthenticated(): boolean {
     try {
-      token = token || this.getItem('token');
+      const token = this.getItem('token');
       return !this.jwtHelper.isTokenExpired(token);
     } catch {
       this.setToken('');
@@ -31,8 +31,8 @@ export class AuthService {
     }
   }
 
-  decodeToken(token: string): {} {
-    return this.jwtHelper.decodeToken(token);
+  getDecodeToken(): {} {
+    return this.jwtHelper.decodeToken(this.getItem('token'));
   }
 
   getExpiration(): Date {
