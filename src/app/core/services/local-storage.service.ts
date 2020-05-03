@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class LocalStorageService {
 
-  private storage$ = new Subject<String>();
+  private storage$ = new Subject<string>();
 
   constructor() { }
 

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class ApiService {
   private BASE_URL: string = environment.apiUrl;
   private API_VERSION: string = environment.apiVersion;
-  URL = `${this.BASE_URL}/${this.API_VERSION}`
+  URL = `${this.BASE_URL}/${this.API_VERSION}`;
   public http: HttpClient;
 
   constructor(private injector: Injector) {

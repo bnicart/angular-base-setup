@@ -14,7 +14,7 @@ export class OrganisationSettingsComponent implements OnInit {
 
   ngOnInit() {
     this.setUserDetails();
-    this.localStorageService.watchStorage().subscribe(_data => this.setUserDetails());
+    this.localStorageService.watchStorage().subscribe(() => this.setUserDetails());
   }
 
   setUserDetails(): void {

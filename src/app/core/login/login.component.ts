@@ -13,7 +13,7 @@ import { LoginDetail, LoginReponse } from './login.model';
 })
 export class LoginComponent implements OnInit {
   loginDetails: LoginDetail = new LoginDetail('', '');
-  loading: boolean = false;
+  loading = false;
 
   constructor(
     private userService: UserService,

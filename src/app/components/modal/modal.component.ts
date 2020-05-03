@@ -7,11 +7,11 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
-  @Input() title: string = 'Modal Title';
+  @Input() title = 'Modal Title';
   @Input() name: string;
-  @Input() saveButtonText: string = 'Save';
-  @Input() saveButtonClass: string = 'btn-primary';
-  @Input() cancelButtonText: string = 'Cancel';
+  @Input() saveButtonText = 'Save';
+  @Input() saveButtonClass = 'btn-primary';
+  @Input() cancelButtonText = 'Cancel';
   @Output() saveClicked: EventEmitter<Array<NgModel>> = new EventEmitter();
   @Output() cancelClicked: EventEmitter<void> = new EventEmitter();
 

@@ -12,7 +12,7 @@ import { Team } from 'src/app/models/team.model';
   styleUrls: ['./team-settings.component.scss']
 })
 export class TeamSettingsComponent implements OnInit {
-  query: string = '';
+  query = '';
   userDetails: User;
   currentOrganisationData: Organisation;
   selectedTeam: Team = {};
@@ -25,7 +25,7 @@ export class TeamSettingsComponent implements OnInit {
 
   ngOnInit() {
     this.setOrganisationData();
-    this.localStorageService.watchStorage().subscribe(_data => this.setOrganisationData());
+    this.localStorageService.watchStorage().subscribe(() => this.setOrganisationData());
   }
 
   setOrganisationData(): void {
@@ -38,26 +38,26 @@ export class TeamSettingsComponent implements OnInit {
   filteredTeams(teams: Array<Team>): Array<Team> {
     if (!teams) { teams = []; }
     return teams.filter((team: Team) => team.name.toLowerCase().includes(this.query.toLowerCase()))
-      .sort((a,b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
+      .sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
   }
 
   createTeam(data: Array<any>) {
     const teamName = data.find(d => d.name === 'teamName').value;
 
     this.teamService.create({name: teamName, organisation_id: this.currentOrganisationData.id})
-    .subscribe(_response => this.setOrganisationData());
+    .subscribe(() => this.setOrganisationData());
   }
 
   updateTeam(data: Array<any>): void {
     const teamName = data.find(d => d.name === 'teamName').value;
 
     this.teamService.update(this.selectedTeam.id, { name: teamName })
-    .subscribe(_response => this.setOrganisationData());
+    .subscribe(() => this.setOrganisationData());
   }
 
   deleteTeam(): void {
     this.teamService.remove(this.selectedTeam.id)
-    .subscribe(_response => this.setOrganisationData());
+    .subscribe(() => this.setOrganisationData());
   }
 
   cancelTeamCreation() {

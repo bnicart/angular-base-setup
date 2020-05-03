@@ -12,7 +12,7 @@ import { LoggedInUserDetails, Organisation } from '../models/logged-in-user-deta
 })
 export class NavbarComponent implements OnInit {
   userDetails: LoggedInUserDetails;
-  loading: boolean = false;
+  loading = false;
 
   constructor(
     private authService: AuthService,
@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
     }, (error) => {
       alert(error);
       this.loading = false;
-    })
+    });
   }
 
   logout(): void {

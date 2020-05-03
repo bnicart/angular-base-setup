@@ -10,7 +10,7 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  loading: boolean = false;
+  loading = false;
   userDetails: User;
 
   constructor(
