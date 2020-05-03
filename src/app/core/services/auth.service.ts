@@ -1,38 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { LoggedInUserDetails } from '../models/logged-in-user-details.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class AuthService {
   jwtHelper: JwtHelperService = new JwtHelperService();
 
-  constructor(private router: Router) { }
-
-  getItem(itemName: string): string {
-    return localStorage.getItem(itemName);
-  }
-
-  setItem(key: string, value: string): void {
-    localStorage.setItem(key, value);
-  }
+  constructor(private router: Router, private localStorageService: LocalStorageService) { }
 
   setToken(token: string): void {
     if (token) {
-      localStorage.setItem('token', token);
+      this.localStorageService.setItem('token', token);
     } else {
-      localStorage.clear();
+      this.localStorageService.clear();
     }
   }
 
   logout(): void {
-    localStorage.clear();
+    this.localStorageService.clear();
     this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
     try {
-      const token = this.getItem('token');
+      const token = this.localStorageService.getItem('token');
       return !this.jwtHelper.isTokenExpired(token);
     } catch {
       this.setToken('');
@@ -41,10 +33,10 @@ export class AuthService {
   }
 
   getDecodeToken(): {} {
-    return this.jwtHelper.decodeToken(this.getItem('token'));
+    return this.jwtHelper.decodeToken(this.localStorageService.getItem('token'));
   }
 
   getExpiration(): Date {
-    return this.jwtHelper.getTokenExpirationDate(this.getItem('token'));
+    return this.jwtHelper.getTokenExpirationDate(this.localStorageService.getItem('token'));
   }
 }
