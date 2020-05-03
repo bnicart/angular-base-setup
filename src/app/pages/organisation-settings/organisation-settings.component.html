@@ -1,1 +1,36 @@
 <h3>{{ userDetails.current_organisation.name + ' Settings'}}</h3>
+
+<hr>
+<div class="row">
+  <div class="organisation-settings-navigation col-md-2">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/team-settings']" class="nav-link text-secondary" routerLinkActive="active">Team Settings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/team-members']" class="nav-link text-secondary" routerLinkActive="active">Team Members</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/flow-setups']" class="nav-link text-secondary" routerLinkActive="active">Flow Setups</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/forms-setups']" class="nav-link text-secondary" routerLinkActive="active">Forms Setups</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/automation']" class="nav-link text-secondary" routerLinkActive="active">Automation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/communication']" class="nav-link text-secondary" routerLinkActive="active">Communication</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/billing']" class="nav-link text-secondary" routerLinkActive="active">Billing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/organisation-settings/settings']" class="nav-link text-secondary" routerLinkActive="active">Settings</a>
+      </li>
+    </ul>
+  </div>
+  <div class="organisation-settings-content col-md-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>
