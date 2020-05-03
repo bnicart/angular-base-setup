@@ -1,1 +1,41 @@
-<p>team-settings works!</p>
+<div class="d-flex align-items-center">
+  <h4 class="mb-0">Team Settings</h4>
+
+  <form class="ml-5">
+    <div class="input-with-icon">
+      <i class="fas fa-search"></i>
+      <input type="text" name="query" [(ngModel)]="query" class="form-control" placeholder="Search teams" autofocus>
+    </div>
+    <button type="submit" class="btn btn-primary d-none"></button>
+  </form>
+
+  <div class="ml-auto">
+    <button type="button" class="btn btn-primary">Add Team</button>
+  </div>
+</div>
+
+<div class="team-settings-content mt-1">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Members</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!filteredTeams(currentOrganisationData?.teams).length">
+          <td colspan="3" class="text-center">No teams found.</td>
+        </tr>
+        <tr *ngFor="let team of filteredTeams(currentOrganisationData?.teams)">
+          <td>{{ team.name }}</td>
+          <td>{{ team.member_count }} member{{team.member_count > 1 ? 's':''}}</td>
+          <td>
+            <button type="button" class="btn btn-link text-primary">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

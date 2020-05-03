@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
-import { LoggedInUserDetails } from 'src/app/core/models/logged-in-user-details.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-organisation-settings',
@@ -8,7 +8,7 @@ import { LoggedInUserDetails } from 'src/app/core/models/logged-in-user-details.
   styleUrls: ['./organisation-settings.component.scss']
 })
 export class OrganisationSettingsComponent implements OnInit {
-  userDetails: LoggedInUserDetails;
+  userDetails: User;
 
   constructor(private localStorageService: LocalStorageService) { }
 

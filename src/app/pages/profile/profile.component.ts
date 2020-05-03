@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { UserService } from 'src/app/core/services/custom/user.service';
-import { LoggedInUserDetails } from 'src/app/core/models/logged-in-user-details.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +11,7 @@ import { LoggedInUserDetails } from 'src/app/core/models/logged-in-user-details.
 })
 export class ProfileComponent implements OnInit {
   loading: boolean = false;
-  userDetails: LoggedInUserDetails;
+  userDetails: User;
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   save(): void {
     this.loading = true;
     this.userService.update(this.userDetails.id, { ...this.userDetails })
-    .subscribe((response: LoggedInUserDetails) => {
+    .subscribe((response: User) => {
       this.loading = false;
       this.localStorageService.setItem('user_details', JSON.stringify(response));
       this.router.navigate(['/profile']);
