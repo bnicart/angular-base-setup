@@ -36,7 +36,7 @@ import { HttpErrorInterceptor } from './services/http-error.interceptor';
   ],
   exports: [
     RouterModule,
-    NavbarComponent
+    NavbarComponent,
   ],
   declarations: [
     AppRootComponent,

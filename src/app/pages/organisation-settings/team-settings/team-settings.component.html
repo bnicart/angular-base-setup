@@ -10,7 +10,7 @@
   </form>
 
   <div class="ml-auto">
-    <button type="button" class="btn btn-primary">Add Team</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-team-modal" (click)="setSelectedTeam({})">Add Team</button>
   </div>
 </div>
 
@@ -32,10 +32,35 @@
           <td>{{ team.name }}</td>
           <td>{{ team.member_count }} member{{team.member_count > 1 ? 's':''}}</td>
           <td>
-            <button type="button" class="btn btn-link text-primary">Edit</button>
+            <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-team-modal" (click)="setSelectedTeam(team)">Edit</button>
+            <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#delete-team-modal" (click)="setSelectedTeam(team)">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+<app-modal name="new-team-modal" title="New Team" (saveClicked)="createTeam($event)" (cancelClicked)="cancelTeamCreation()">
+  <div class="form-group row">
+    <label for="team-name" class="col-sm-3 col-form-label">Name</label>
+    <div class="col-sm-9">
+      <input type="text" name="teamName" [(ngModel)]="selectedTeam.name" class="form-control">
+    </div>
+  </div>
+</app-modal>
+
+<app-modal name="edit-team-modal" title="Edit Team" (saveClicked)="updateTeam($event)">
+  <div class="form-group row">
+    <label for="team-name" class="col-sm-3 col-form-label">Name</label>
+    <div class="col-sm-9">
+      <input type="text" name="teamName" [(ngModel)]="selectedTeam.name" class="form-control">
+    </div>
+  </div>
+</app-modal>
+
+<app-modal name="delete-team-modal" title="Delete Team" (saveClicked)="deleteTeam()" [saveButtonText]="'Delete'" [saveButtonClass]="'btn-danger'">
+  <p>
+    Are you sure you want to delete team
+    <span class="font-weight-bold">{{ selectedTeam?.name }}?</span>
+  </p>
+</app-modal>

@@ -8,11 +8,11 @@ import { Organisation } from 'src/app/models/organisation.model';
 })
 export class OrganisationService extends ApiService {
 
-  userUrl = `${this.URL}/organisations`;
+  url = `${this.URL}/organisations`;
 
   constructor(injector: Injector) { super(injector); }
 
   get(id: string): Observable<Organisation> {
-    return this.http.get<Organisation>(`${this.userUrl}/${id}`);
+    return this.http.get<Organisation>(`${this.url}/${id}`);
   }
 }

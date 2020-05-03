@@ -7,16 +7,16 @@ import { LoginDetail } from '../../login/login.model';
 })
 export class UserService extends ApiService {
 
-  userUrl = `${this.URL}/users`;
+  url = `${this.URL}/users`;
 
   constructor(injector: Injector) { super(injector); }
 
   authenticate(loginDetails: LoginDetail) {
     const credentials = { user: loginDetails };
-    return this.http.post(`${this.userUrl}/authenticate`, credentials);
+    return this.http.post(`${this.url}/authenticate`, credentials);
   }
 
   update(id: string, data: object) {
-    return this.http.patch(`${this.userUrl}/${id}`, { user: data });
+    return this.http.patch(`${this.url}/${id}`, { user: data });
   }
 }
