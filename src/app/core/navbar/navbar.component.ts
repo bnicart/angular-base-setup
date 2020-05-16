@@ -13,6 +13,7 @@ import { LoggedInUserDetails, Organisation } from '../models/logged-in-user-deta
 export class NavbarComponent implements OnInit {
   userDetails: LoggedInUserDetails;
   loading = false;
+  currentOrganisationLogo = '';
 
   constructor(
     private authService: AuthService,
@@ -27,6 +28,7 @@ export class NavbarComponent implements OnInit {
     } else {
       this.setUserDetails(this.authService.getDecodeToken() as LoggedInUserDetails);
     }
+    this.setCurrentOrganisationLogo(this.userDetails.current_organisation);
   }
 
   setUserDetails(value: LoggedInUserDetails): void {
@@ -34,9 +36,8 @@ export class NavbarComponent implements OnInit {
     this.localStorageService.setItem('user_details', JSON.stringify(this.userDetails));
   }
 
-  getCurrentOrganisationLogo(organisation: Organisation): string {
-    const logoUrl: string = organisation.logo || 'assets/images/placeholder-logo.png';
-    return logoUrl;
+  setCurrentOrganisationLogo(organisation: Organisation): void {
+    this.currentOrganisationLogo = organisation.logo || 'assets/images/placeholder-logo.png';
   }
 
   swithOrganisation(organisation: Organisation): void {

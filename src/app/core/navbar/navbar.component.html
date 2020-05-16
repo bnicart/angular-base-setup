@@ -8,8 +8,7 @@
       <div class="dropdown-menu mt-3" aria-labelledby="organisationOptions">
         <a class="dropdown-item pl-3 pr-5 d-flex align-items-center">
           <img class="current-organisation-logo img-thumbnail mr-1"
-            [src]="getCurrentOrganisationLogo(userDetails.current_organisation)"
-            [alt]="getCurrentOrganisationLogo(userDetails.current_organisation)">
+            [src]="currentOrganisationLogo" [alt]="currentOrganisationLogo">
           <div class="current-organisation-name">{{ userDetails.current_organisation.name }}</div>
         </a>
         <div class="dropdown-divider"></div>
@@ -66,7 +65,7 @@
       </a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" [class.disabled]="organisation.id === userDetails.current_organisation.id"
-        *ngFor="let organisation of userDetails.organisations | sortBy:'name'"
+        *ngFor="let organisation of userDetails.organisations | sortBy:-'name'"
         (click)="swithOrganisation(organisation)">
         <div class="with-icon">
           <i class="fas text-primary"

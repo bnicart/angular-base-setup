@@ -29,7 +29,10 @@
           <td colspan="3" class="text-center">No teams found.</td>
         </tr>
         <tr *ngFor="let team of filteredTeams(currentOrganisationData?.teams)">
-          <td>{{ team.name }}</td>
+          <td>
+            {{ team.name }}
+            <span class="badge badge-info" *ngIf="team.state === 'pending'">pending</span>
+          </td>
           <td>{{ team.member_count }} member{{team.member_count > 1 ? 's':''}}</td>
           <td>
             <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-team-modal" (click)="setSelectedTeam(team)">Edit</button>
@@ -54,6 +57,14 @@
     <label for="team-name" class="col-sm-3 col-form-label">Name</label>
     <div class="col-sm-9">
       <input type="text" name="teamName" [(ngModel)]="selectedTeam.name" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="team-members" class="col-sm-3 col-form-label">Members</label>
+    <div class="col-sm-9">
+      <ul>
+        <li *ngFor="let member of []"></li>
+      </ul>
     </div>
   </div>
 </app-modal>

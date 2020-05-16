@@ -18,6 +18,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
 import { HttpErrorInterceptor } from './services/http-error.interceptor';
+import { TokenInterceptor } from './services/token.interceptor';
 
 @NgModule({
   imports: [
@@ -47,11 +48,8 @@ import { HttpErrorInterceptor } from './services/http-error.interceptor';
   providers: [
     AuthGuard,
     AuthService,
-    {
-     provide: HTTP_INTERCEPTORS,
-     useClass: HttpErrorInterceptor,
-     multi: true
-   }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ]
 })
 export class CoreModule { }
