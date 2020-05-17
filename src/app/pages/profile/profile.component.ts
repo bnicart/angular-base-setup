@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.userDetails = camelizeKeys(JSON.parse(this.localStorageService.getItem('userDetails')))
+    this.userDetails = camelizeKeys(JSON.parse(this.localStorageService.getItem('userDetails')));
   }
 
   save(): void {
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
       this.loading = false;
       this.localStorageService.setItem('userDetails', JSON.stringify(response));
       this.router.navigate(['/profile']);
-    }, _error => { this.loading = false; });
+    }, _ => { this.loading = false; });
   }
 
 }

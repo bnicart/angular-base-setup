@@ -57,7 +57,7 @@ export class MembersComponent implements OnInit {
     params = {
       ...params,
       teamIds: this.currentOrganisationTeamsCopy.filter(team => team.selected).map(team => team.id)
-    }
+    };
 
     this.userService.update(this.selectedMember.id, params)
     .subscribe(() => this.setOrganisationData());
@@ -91,8 +91,8 @@ export class MembersComponent implements OnInit {
     this.selectedMember = Object.assign({}, user) as User;
     this.currentOrganisationTeamsCopy = JSON.parse(JSON.stringify(this.currentOrganisationTeams));
     this.currentOrganisationTeamsCopy.forEach((team: Team) => {
-      team.selected = !!this.selectedMember.teams.find((t: Team) => t.id === team.id)
-    })
+      team.selected = !!this.selectedMember.teams.find((t: Team) => t.id === team.id);
+    });
   }
 
 }

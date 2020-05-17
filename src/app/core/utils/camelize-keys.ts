@@ -1,14 +1,14 @@
 const camelize = (str: string) => {
   return str.replace(/([-_][a-z])/gi, ($1) => {
-    return $1.toUpperCase().replace("-", "").replace("_", "");
+    return $1.toUpperCase().replace('-', '').replace('_', '');
   });
 };
 
 const isArray = (array: any) => Array.isArray(array);
 
-const isObject = (obj: any) => Object.prototype.toString.call(obj) === "[object Object]";
+const isObject = (obj: any) => Object.prototype.toString.call(obj) === '[object Object]';
 
-export const camelizeKeys = function (o: any) {
+export const camelizeKeys = (o: any) => {
   if (isObject(o)) {
     const n = {};
 
