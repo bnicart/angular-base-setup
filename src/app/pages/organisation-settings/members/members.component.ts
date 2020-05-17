@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { OrganisationService } from 'src/app/core/services/custom/organisation.service';
 import { User } from 'src/app/models/user.model';
@@ -6,13 +6,16 @@ import { Organisation } from 'src/app/models/organisation.model';
 import { UserService } from 'src/app/core/services/custom/user.service';
 import { extract } from 'src/app/core/utils/extract-data-from-array';
 import { Team } from 'src/app/models/team.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })
-export class MembersComponent implements OnInit {
+export class MembersComponent implements OnInit, OnDestroy {
+
+  subscriptions: Array<Subscription> = [];
 
   query = '';
   userDetails: User = {};
@@ -29,11 +32,19 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
     this.setOrganisationData();
-    this.localStorageService.watchStorage().subscribe(() => this.setOrganisationData());
+    const localStorageService$ = this.localStorageService.watchStorage().subscribe(() => this.setOrganisationData());
+    this.subscriptions.push(localStorageService$);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   setOrganisationData(): void {
     this.userDetails = JSON.parse(this.localStorageService.getItem('userDetails'));
+
+    if (!this.userDetails) { return; }
+
     this.organisationService.get(this.userDetails.currentOrganisation.id).subscribe((data: Organisation) => {
       this.currentOrganisationData = data;
       this.currentOrganisationTeams = Array.from(this.currentOrganisationData.teams).filter(team => team.state === 'active');
