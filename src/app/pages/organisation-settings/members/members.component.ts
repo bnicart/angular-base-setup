@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user.model';
 import { Organisation } from 'src/app/models/organisation.model';
 import { UserService } from 'src/app/core/services/custom/user.service';
 import { extract } from 'src/app/core/utils/extract-data-from-array';
+import { Team } from 'src/app/models/team.model';
 
 @Component({
   selector: 'app-members',
@@ -17,6 +18,8 @@ export class MembersComponent implements OnInit {
   userDetails: User = {};
   selectedMember: User = {};
   currentOrganisationData: Organisation;
+  currentOrganisationTeams: Array<Team> = [];
+  currentOrganisationTeamsCopy: Array<Team> = [];
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -33,6 +36,7 @@ export class MembersComponent implements OnInit {
     this.userDetails = JSON.parse(this.localStorageService.getItem('userDetails'));
     this.organisationService.get(this.userDetails.currentOrganisation.id).subscribe((data: Organisation) => {
       this.currentOrganisationData = data;
+      this.currentOrganisationTeams = Array.from(this.currentOrganisationData.teams).filter(team => team.state === 'active');
     });
   }
 
@@ -49,7 +53,11 @@ export class MembersComponent implements OnInit {
   }
 
   updateMember(data: Array<any>): void {
-    const params = this.getUserParams(data);
+    let params = this.getUserParams(data);
+    params = {
+      ...params,
+      teamIds: this.currentOrganisationTeamsCopy.filter(team => team.selected).map(team => team.id)
+    }
 
     this.userService.update(this.selectedMember.id, params)
     .subscribe(() => this.setOrganisationData());
@@ -74,12 +82,17 @@ export class MembersComponent implements OnInit {
     } as User;
   }
 
-  cancelMemberCreation() {
+  modalClosed() {
     console.log('Cancel clicked');
+    this.currentOrganisationTeamsCopy = [];
   }
 
   setSelectedMember(user: User): void {
     this.selectedMember = Object.assign({}, user) as User;
+    this.currentOrganisationTeamsCopy = JSON.parse(JSON.stringify(this.currentOrganisationTeams));
+    this.currentOrganisationTeamsCopy.forEach((team: Team) => {
+      team.selected = !!this.selectedMember.teams.find((t: Team) => t.id === team.id)
+    })
   }
 
 }

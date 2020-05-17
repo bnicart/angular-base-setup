@@ -14,6 +14,7 @@ export interface User {
   currentOrganisationId?: string;
   currentOrganisation?: Organisation;
   organisations?: Array<Organisation>;
+  teamIds?: Array<string>;
   teams?: Array<Team>;
   password?: string;
   confirmPassword?: string;

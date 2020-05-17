@@ -34,7 +34,7 @@
             <span class="badge badge-info" *ngIf="team.state === 'pending'">pending</span>
             <span class="badge badge-warning" *ngIf="team.state === 'archived'">archived</span>
           </td>
-          <td>{{ team.member_count }} member{{team.member_count > 1 ? 's':''}}</td>
+          <td>{{ team.memberCount }} member{{team.memberCount > 1 ? 's':''}}</td>
           <td>
             <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-team-modal" (click)="setSelectedTeam(team)">Edit</button>
             <!-- <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#delete-team-modal" (click)="setSelectedTeam(team)">Delete</button> -->

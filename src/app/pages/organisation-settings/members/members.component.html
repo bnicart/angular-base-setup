@@ -54,7 +54,7 @@
 
 
 <!-- CREATE MEMBER MODAL -->
-<app-modal name="new-member-modal" title="New Member" (saveClicked)="createMember($event)" (cancelClicked)="cancelMemberCreation()">
+<app-modal name="new-member-modal" title="New Member" (saveClicked)="createMember($event)" (cancelClicked)="modalClosed()">
   <div class="row">
     <div class="col-6">
       <div class="form-group">
@@ -97,7 +97,7 @@
 </app-modal>
 
 <!-- UPDATE MEMBER MODAL -->
-<app-modal name="edit-member-modal" title="Edit Member" (saveClicked)="updateMember($event)">
+<app-modal name="edit-member-modal" title="Edit Member" (saveClicked)="updateMember($event)" (cancelClicked)="modalClosed()">
   <div class="row">
     <div class="col-6">
       <div class="form-group">
@@ -143,6 +143,17 @@
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" class="form-control" name="password" [(ngModel)]="selectedMember.password">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4" *ngFor="let team of currentOrganisationTeamsCopy">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="team.selected" [id]="'team' + team.id">
+        <label class="form-check-label" [for]="'team' + team.id">
+          {{ team.name }}
+        </label>
       </div>
     </div>
   </div>

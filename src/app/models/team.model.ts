@@ -5,4 +5,5 @@ export interface Team {
   state?: string;
   logo?: string;
   organisationId?: string;
+  selected?: boolean;
 }
