@@ -8,9 +8,10 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, map } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
+import { camelizeKeys } from '../utils/camelize-keys';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -42,6 +43,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
         window.alert(errorMessage);
         return throwError(errorMessage);
+      }),
+      map((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          const modEvent = event.clone({body: camelizeKeys(event.body)});
+          return modEvent;
+        }
       })
     );
   }

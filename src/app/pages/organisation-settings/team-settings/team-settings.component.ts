@@ -5,6 +5,7 @@ import { TeamService } from 'src/app/core/services/custom/team.service';
 import { Organisation } from 'src/app/models/organisation.model';
 import { User } from 'src/app/models/user.model';
 import { Team } from 'src/app/models/team.model';
+import { extract } from 'src/app/core/utils/extract-data-from-array';
 
 @Component({
   selector: 'app-team-settings',
@@ -29,8 +30,8 @@ export class TeamSettingsComponent implements OnInit {
   }
 
   setOrganisationData(): void {
-    this.userDetails = JSON.parse(this.localStorageService.getItem('user_details'));
-    this.organisationService.get(this.userDetails.current_organisation.id).subscribe((data: Organisation) => {
+    this.userDetails = JSON.parse(this.localStorageService.getItem('userDetails'));
+    this.organisationService.get(this.userDetails.currentOrganisation.id).subscribe((data: Organisation) => {
       this.currentOrganisationData = data;
     });
   }
@@ -42,22 +43,33 @@ export class TeamSettingsComponent implements OnInit {
   }
 
   createTeam(data: Array<any>) {
-    const teamName = data.find(d => d.name === 'teamName').value;
+    const params = this.getTeamParams(data);
 
-    this.teamService.create({name: teamName, organisation_id: this.currentOrganisationData.id})
+    this.teamService.create(params)
     .subscribe(() => this.setOrganisationData());
   }
 
   updateTeam(data: Array<any>): void {
-    const teamName = data.find(d => d.name === 'teamName').value;
+    const params = this.getTeamParams(data);
 
-    this.teamService.update(this.selectedTeam.id, { name: teamName })
+    this.teamService.update(this.selectedTeam.id, params)
     .subscribe(() => this.setOrganisationData());
   }
 
   deleteTeam(): void {
     this.teamService.remove(this.selectedTeam.id)
     .subscribe(() => this.setOrganisationData());
+  }
+
+  getTeamParams(data: Array<any>): Team {
+    const teamName = extract('teamName').as('name').from(data);
+    const teamState = extract('teamState').as('name').from(data);
+
+    return {
+      name: teamName,
+      state: teamState,
+      organisationId: this.currentOrganisationData.id
+    } as Team;
   }
 
   cancelTeamCreation() {

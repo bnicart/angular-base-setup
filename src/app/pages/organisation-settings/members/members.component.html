@@ -1,1 +1,157 @@
-<p>members works!</p>
+<div class="d-flex align-items-center">
+  <h4 class="mb-0">Organisation Members</h4>
+
+  <form class="ml-5">
+    <div class="input-with-icon">
+      <i class="fas fa-search"></i>
+      <input type="text" name="query" [(ngModel)]="query" class="form-control" placeholder="Search members" autofocus>
+    </div>
+    <button type="submit" class="btn btn-primary d-none"></button>
+  </form>
+
+  <div class="ml-auto">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-member-modal" (click)="setSelectedMember({})">Add Member</button>
+  </div>
+</div>
+
+<div class="member-settings-content mt-1">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Teams</th>
+          <th>Permissions</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!filteredMembers(currentOrganisationData?.users).length">
+          <td colspan="4" class="text-center">No members found.</td>
+        </tr>
+        <tr *ngFor="let member of filteredMembers(currentOrganisationData?.users)">
+          <td>
+            <!-- <img [src]="member.photo" alt="Member Photo" class="img-thumbnail" width="100"> -->
+            {{ member.name }}
+            <span class="badge badge-info" *ngIf="member.state === 'pending'">pending</span>
+            <span class="badge badge-warning" *ngIf="member.state === 'archived'">archived</span>
+          </td>
+          <td>{{ member.teams.length }} Team/s</td>
+          <td>Full Access</td>
+          <td>
+            <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-member-modal" (click)="setSelectedMember(member)">Edit</button>
+            <!-- <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#delete-member-modal"
+              (click)="setSelectedMember(member)"
+              *ngIf="member.id !== userDetails.id"
+              >Delete
+            </button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- CREATE MEMBER MODAL -->
+<app-modal name="new-member-modal" title="New Member" (saveClicked)="createMember($event)" (cancelClicked)="cancelMemberCreation()">
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" [(ngModel)]="selectedMember.firstName">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" [(ngModel)]="selectedMember.lastName">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="selectedMember.email">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" [(ngModel)]="selectedMember.username">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="selectedMember.password">
+      </div>
+    </div>
+  </div>
+
+</app-modal>
+
+<!-- UPDATE MEMBER MODAL -->
+<app-modal name="edit-member-modal" title="Edit Member" (saveClicked)="updateMember($event)">
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" name="firstName" [(ngModel)]="selectedMember.firstName">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" name="lastName" [(ngModel)]="selectedMember.lastName">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="selectedMember.email">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="team-state">State</label>
+        <select class="form-control" name="state" [(ngModel)]="selectedMember.state">
+          <option value="pending">Pending</option>
+          <option value="active">Active</option>
+          <option value="archived">Archived</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" name="username" [(ngModel)]="selectedMember.username">
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="selectedMember.password">
+      </div>
+    </div>
+  </div>
+</app-modal>
+
+<!-- DELETE MEMBER MODAL -->
+<!-- <app-modal name="delete-member-modal" title="Delete Member" (saveClicked)="deleteMember()" [saveButtonText]="'Delete'" [saveButtonClass]="'btn-danger'">
+  <p>
+    Are you sure you want to delete member
+    <span class="font-weight-bold">{{ selectedMember?.name }}?</span>
+  </p>
+</app-modal> -->

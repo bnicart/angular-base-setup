@@ -1,17 +1,17 @@
 export interface LoggedInUserDetails {
   id: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   name: string;
   initials: string;
   email: string;
   username: string;
   photo: string;
-  current_organisation: Organisation;
+  currentOrganisation: Organisation;
   organisations: Array<Organisation>;
   teams: Array<Team>;
   password?: string;
-  confirm_password?: string;
+  confirmPassword?: string;
 }
 
 export interface Team {

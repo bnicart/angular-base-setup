@@ -32,11 +32,12 @@
           <td>
             {{ team.name }}
             <span class="badge badge-info" *ngIf="team.state === 'pending'">pending</span>
+            <span class="badge badge-warning" *ngIf="team.state === 'archived'">archived</span>
           </td>
           <td>{{ team.member_count }} member{{team.member_count > 1 ? 's':''}}</td>
           <td>
             <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-team-modal" (click)="setSelectedTeam(team)">Edit</button>
-            <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#delete-team-modal" (click)="setSelectedTeam(team)">Delete</button>
+            <!-- <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#delete-team-modal" (click)="setSelectedTeam(team)">Delete</button> -->
           </td>
         </tr>
       </tbody>
@@ -45,8 +46,8 @@
 </div>
 <app-modal name="new-team-modal" title="New Team" (saveClicked)="createTeam($event)" (cancelClicked)="cancelTeamCreation()">
   <div class="form-group row">
-    <label for="team-name" class="col-sm-3 col-form-label">Name</label>
-    <div class="col-sm-9">
+    <label for="team-name" class="col-3 col-form-label">Name</label>
+    <div class="col-9">
       <input type="text" name="teamName" [(ngModel)]="selectedTeam.name" class="form-control">
     </div>
   </div>
@@ -54,19 +55,29 @@
 
 <app-modal name="edit-team-modal" title="Edit Team" (saveClicked)="updateTeam($event)">
   <div class="form-group row">
-    <label for="team-name" class="col-sm-3 col-form-label">Name</label>
-    <div class="col-sm-9">
+    <label for="team-name" class="col-3 col-form-label">Name</label>
+    <div class="col-9">
       <input type="text" name="teamName" [(ngModel)]="selectedTeam.name" class="form-control">
     </div>
   </div>
   <div class="form-group row">
-    <label for="team-members" class="col-sm-3 col-form-label">Members</label>
-    <div class="col-sm-9">
+    <label for="team-state" class="col-3 col-form-label">State</label>
+    <div class="col-9">
+      <select class="form-control" name="teamState" [(ngModel)]="selectedTeam.state">
+        <option value="pending">Pending</option>
+        <option value="active">Active</option>
+        <option value="archived">Archived</option>
+      </select>
+    </div>
+  </div>
+  <!-- <div class="form-group row">
+    <label for="team-members" class="col-3 col-form-label">Members</label>
+    <div class="col-9">
       <ul>
         <li *ngFor="let member of []"></li>
       </ul>
     </div>
-  </div>
+  </div> -->
 </app-modal>
 
 <app-modal name="delete-team-modal" title="Delete Team" (saveClicked)="deleteTeam()" [saveButtonText]="'Delete'" [saveButtonClass]="'btn-danger'">

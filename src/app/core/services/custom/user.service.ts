@@ -1,6 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
 import { ApiService } from '../api.service';
 import { LoginDetail } from '../../login/login.model';
+import { User } from 'src/app/models/user.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,19 @@ export class UserService extends ApiService {
     return this.http.post(`${this.url}/authenticate`, credentials);
   }
 
-  update(id: string, data: object) {
-    return this.http.patch(`${this.url}/${id}`, { user: data });
+  create(data: User): Observable<User> {
+    return this.http.post<User>(`${this.url}`, { user : data });
+  }
+
+  get(id: string): Observable<User> {
+    return this.http.get<User>(`${this.url}/${id}`);
+  }
+
+  update(id: string, data: User): Observable<any> {
+    return this.http.patch<User>(`${this.url}/${id}`, { user : data });
+  }
+
+  remove(id: string): Observable<User> {
+    return this.http.delete<User>(`${this.url}/${id}`);
   }
 }

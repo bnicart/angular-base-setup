@@ -4,6 +4,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { UserService } from '../services/custom/user.service';
 
 import { LoggedInUserDetails, Organisation } from '../models/logged-in-user-details.model';
+import { camelizeKeys } from '../utils/camelize-keys';
 
 @Component({
   selector: 'app-navbar',
@@ -22,18 +23,18 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const details = this.localStorageService.getItem('user_details');
+    const details = this.localStorageService.getItem('userDetails');
     if (details) {
       this.setUserDetails(JSON.parse(details));
     } else {
-      this.setUserDetails(this.authService.getDecodeToken() as LoggedInUserDetails);
+      this.setUserDetails(camelizeKeys(this.authService.getDecodeToken()) as LoggedInUserDetails);
     }
-    this.setCurrentOrganisationLogo(this.userDetails.current_organisation);
+    this.setCurrentOrganisationLogo(this.userDetails.currentOrganisation);
   }
 
   setUserDetails(value: LoggedInUserDetails): void {
     this.userDetails = value;
-    this.localStorageService.setItem('user_details', JSON.stringify(this.userDetails));
+    this.localStorageService.setItem('userDetails', JSON.stringify(this.userDetails));
   }
 
   setCurrentOrganisationLogo(organisation: Organisation): void {
@@ -42,7 +43,7 @@ export class NavbarComponent implements OnInit {
 
   swithOrganisation(organisation: Organisation): void {
     this.loading = true;
-    this.userService.update(this.userDetails.id, { current_organisation_id: organisation.id })
+    this.userService.update(this.userDetails.id, { currentOrganisationId: organisation.id })
     .subscribe((response: LoggedInUserDetails) => {
       this.loading = false;
       this.setUserDetails(response);

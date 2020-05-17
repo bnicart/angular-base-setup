@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { UserService } from 'src/app/core/services/custom/user.service';
 import { User } from 'src/app/models/user.model';
+import { camelizeKeys } from 'src/app/core/utils/camelize-keys';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +20,7 @@ export class ProfileComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.userDetails = JSON.parse(this.localStorageService.getItem('user_details'));
+    this.userDetails = camelizeKeys(JSON.parse(this.localStorageService.getItem('userDetails')))
   }
 
   save(): void {
@@ -27,9 +28,9 @@ export class ProfileComponent implements OnInit {
     this.userService.update(this.userDetails.id, { ...this.userDetails })
     .subscribe((response: User) => {
       this.loading = false;
-      this.localStorageService.setItem('user_details', JSON.stringify(response));
+      this.localStorageService.setItem('userDetails', JSON.stringify(response));
       this.router.navigate(['/profile']);
-    });
+    }, _error => { this.loading = false; });
   }
 
 }

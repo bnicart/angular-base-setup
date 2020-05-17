@@ -18,7 +18,7 @@ export class OrganisationSettingsComponent implements OnInit {
   }
 
   setUserDetails(): void {
-    this.userDetails = JSON.parse(this.localStorageService.getItem('user_details'));
+    this.userDetails = JSON.parse(this.localStorageService.getItem('userDetails'));
   }
 
 }
