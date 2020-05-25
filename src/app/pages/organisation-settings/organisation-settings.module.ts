@@ -12,6 +12,7 @@ import { CommunicationComponent } from './communication/communication.component'
 import { BillingComponent } from './billing/billing.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MembersComponent } from './members/members.component';
+import { OrgObjectsComponent } from './org-objects/org-objects.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MembersComponent } from './members/members.component';
     CommunicationComponent,
     BillingComponent,
     SettingsComponent,
-    MembersComponent
+    MembersComponent,
+    OrgObjectsComponent
   ],
   imports: [
     CommonModule,

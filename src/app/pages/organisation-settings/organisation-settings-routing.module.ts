@@ -9,6 +9,7 @@ import { AutomationComponent } from './automation/automation.component';
 import { CommunicationComponent } from './communication/communication.component';
 import { BillingComponent } from './billing/billing.component';
 import { SettingsComponent } from './settings/settings.component';
+import { OrgObjectsComponent } from './org-objects/org-objects.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: 'team-settings', component: TeamSettingsComponent },
       { path: 'members', component: MembersComponent },
+      { path: 'org-objects', component: OrgObjectsComponent },
       { path: 'flow-setups', component: FlowSetupsComponent },
       { path: 'forms-setups', component: FormsSetupsComponent },
       { path: 'automation', component: AutomationComponent },
