@@ -110,7 +110,7 @@ export class OrgObjectsComponent implements OnInit {
       name,
       config,
       state,
-      currentOrganisationId: this.currentOrganisationData.id
+      organisationId: this.currentOrganisationData.id
     } as User;
   }
 

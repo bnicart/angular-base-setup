@@ -38,7 +38,7 @@
             <pre class="pre-scrollable"><code>{{ orgObject.config | json }}</code></pre>
           </td>
           <td>
-            <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-org-object-modal" (click)="setSelectedOrgObject(orgObject)">Edit</button>
+            <!-- <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-org-object-modal" (click)="setSelectedOrgObject(orgObject)">Edit</button> -->
             <!-- <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#delete-org-object-modal"
               (click)="setSelectedOrgObject(orgObject)"
               *ngIf="orgObject.id !== userDetails.id"
@@ -106,7 +106,7 @@
 
 <!-- UPDATE ORG OBJECT MODAL -->
 <app-modal name="edit-org-object-modal" title="Edit OrgObject" (saveClicked)="updateOrgObject($event)" (cancelClicked)="modalClosed()">
-  
+
 </app-modal>
 
 <!-- DELETE MEMBER MODAL -->
