@@ -1,1 +1,118 @@
-<p>org-objects works!</p>
+<div class="d-flex align-items-center">
+  <h4 class="mb-0">Organisation Objects</h4>
+
+  <form class="ml-5">
+    <div class="input-with-icon">
+      <i class="fas fa-search"></i>
+      <input type="text" name="query" [(ngModel)]="query" class="form-control" placeholder="Search objects" autofocus>
+    </div>
+    <button type="submit" class="btn btn-primary d-none"></button>
+  </form>
+
+  <div class="ml-auto">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-org-object-modal" (click)="setSelectedOrgObject({})">Add Object</button>
+  </div>
+</div>
+
+<div class="orgObject-settings-content mt-1">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Config</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!filteredOrgObjects(currentOrganisationObjects).length">
+          <td colspan="4" class="text-center">No objects found.</td>
+        </tr>
+        <tr *ngFor="let orgObject of filteredOrgObjects(currentOrganisationObjects)">
+          <td>
+            {{ orgObject.name }}
+            <span class="badge badge-info" *ngIf="orgObject.state === 'pending'">pending</span>
+            <span class="badge badge-warning" *ngIf="orgObject.state === 'archived'">archived</span>
+          </td>
+          <td>
+            <pre class="pre-scrollable"><code>{{ orgObject.config | json }}</code></pre>
+          </td>
+          <td>
+            <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#edit-org-object-modal" (click)="setSelectedOrgObject(orgObject)">Edit</button>
+            <!-- <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#delete-org-object-modal"
+              (click)="setSelectedOrgObject(orgObject)"
+              *ngIf="orgObject.id !== userDetails.id"
+              >Delete
+            </button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- CREATE ORG OBJECT MODAL -->
+<app-modal name="new-org-object-modal" title="New Object" (saveClicked)="createOrgObject($event)" (cancelClicked)="modalClosed()">
+  <div class="form-group row">
+    <div class="col-3">
+      <label for="name">Name</label>
+    </div>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" name="name" [(ngModel)]="selectedOrgObject.name">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-12">
+      <button type="button" class="btn btn-primary float-right" (click)="addConfig(selectedOrgObject)">Add Config</button>
+    </div>
+  </div>
+
+  <div class="row d-none">
+    <div class="col-12">
+      <textarea name="config" [(ngModel)]="selectedOrgObject.config"></textarea>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let config of selectedOrgObject.config">
+    <div class="col-4">
+      <div class="form-group">
+        <label for="label">Label</label>
+        <input type="text" class="form-control" name="username" [(ngModel)]="config.label">
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="org-object-type">Type</label>
+        <select class="form-control" name="type" [(ngModel)]="config.type">
+          <option *ngFor="let option of orgObjectConfigTypes" [value]="option.value">{{ option.text }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group">
+        <label for="org-object-state">State</label>
+        <select class="form-control" name="state" [(ngModel)]="config.state">
+          <option value="pending">Pending</option>
+          <option value="active">Active</option>
+          <option value="archived">Archived</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</app-modal>
+
+<!-- UPDATE ORG OBJECT MODAL -->
+<app-modal name="edit-org-object-modal" title="Edit OrgObject" (saveClicked)="updateOrgObject($event)" (cancelClicked)="modalClosed()">
+  
+</app-modal>
+
+<!-- DELETE MEMBER MODAL -->
+<!-- <app-modal name="delete-org-object-modal" title="Delete OrgObject" (saveClicked)="deleteOrgObject()" [saveButtonText]="'Delete'" [saveButtonClass]="'btn-danger'">
+  <p>
+    Are you sure you want to delete orgObject
+    <span class="font-weight-bold">{{ selectedOrgObject?.name }}?</span>
+  </p>
+</app-modal> -->
