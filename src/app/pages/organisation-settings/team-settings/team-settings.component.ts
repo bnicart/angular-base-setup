@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { OrganisationService } from 'src/app/core/services/custom/organisation.service';
 import { TeamService } from 'src/app/core/services/custom/team.service';
 import { Organisation } from 'src/app/models/organisation.model';
@@ -22,15 +22,15 @@ export class TeamSettingsComponent implements OnInit, OnDestroy {
   selectedTeam: Team = {};
 
   constructor(
-    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
     private organisationService: OrganisationService,
     private teamService: TeamService
   ) { }
 
   ngOnInit() {
     this.setOrganisationData();
-    const localStorageService$ = this.localStorageService.watchStorage().subscribe(() => this.setOrganisationData());
-    this.subscriptions.push(localStorageService$);
+    const sessionStorageService$ = this.sessionStorageService.watchStorage().subscribe(() => this.setOrganisationData());
+    this.subscriptions.push(sessionStorageService$);
   }
 
   ngOnDestroy(): void {
@@ -38,7 +38,7 @@ export class TeamSettingsComponent implements OnInit, OnDestroy {
   }
 
   setOrganisationData(): void {
-    this.userDetails = JSON.parse(this.localStorageService.getItem('userDetails'));
+    this.userDetails = JSON.parse(this.sessionStorageService.getItem('userDetails'));
 
     if (!this.userDetails) { return; }
 

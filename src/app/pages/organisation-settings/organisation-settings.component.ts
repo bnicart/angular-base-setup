@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -10,15 +10,15 @@ import { User } from 'src/app/models/user.model';
 export class OrganisationSettingsComponent implements OnInit {
   userDetails: User;
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private sessionStorageService: SessionStorageService) { }
 
   ngOnInit() {
     this.setUserDetails();
-    this.localStorageService.watchStorage().subscribe(() => this.setUserDetails());
+    this.sessionStorageService.watchStorage().subscribe(() => this.setUserDetails());
   }
 
   setUserDetails(): void {
-    this.userDetails = JSON.parse(this.localStorageService.getItem('userDetails'));
+    this.userDetails = JSON.parse(this.sessionStorageService.getItem('userDetails'));
   }
 
 }

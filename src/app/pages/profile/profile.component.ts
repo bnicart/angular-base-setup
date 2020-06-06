@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { UserService } from 'src/app/core/services/custom/user.service';
 import { User } from 'src/app/models/user.model';
 import { camelizeKeys } from 'src/app/core/utils/camelize-keys';
@@ -15,12 +15,12 @@ export class ProfileComponent implements OnInit {
   userDetails: User;
 
   constructor(
-    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
     private userService: UserService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.userDetails = camelizeKeys(JSON.parse(this.localStorageService.getItem('userDetails')));
+    this.userDetails = camelizeKeys(JSON.parse(this.sessionStorageService.getItem('userDetails')));
   }
 
   save(): void {
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     this.userService.update(this.userDetails.id, { ...this.userDetails })
     .subscribe((response: User) => {
       this.loading = false;
-      this.localStorageService.setItem('userDetails', JSON.stringify(response));
+      this.sessionStorageService.setItem('userDetails', JSON.stringify(response));
       this.router.navigate(['/profile']);
     }, _ => { this.loading = false; });
   }

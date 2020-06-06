@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Organisation } from 'src/app/models/organisation.model';
 import { OrganisationObject, OrgObjectConfig } from 'src/app/models/organisation-object.model';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { SessionStorageService } from 'src/app/core/services/session-storage.service';
 import { OrganisationService } from 'src/app/core/services/custom/organisation.service';
 import { OrganisationObjectService } from 'src/app/core/services/custom/organisation-object.service';
 import { extract } from 'src/app/core/utils/extract-data-from-array';
@@ -36,7 +36,7 @@ export class OrgObjectsComponent implements OnInit {
   ];
 
   constructor(
-    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
     private organisationService: OrganisationService,
     private organisationObjectService: OrganisationObjectService,
   ) { }
@@ -44,8 +44,8 @@ export class OrgObjectsComponent implements OnInit {
   ngOnInit() {
     this.setOrganisationData();
     this.setOrganisationObjectData();
-    const localStorageService$ = this.localStorageService.watchStorage().subscribe(() => this.setOrganisationData());
-    this.subscriptions.push(localStorageService$);
+    const sessionStorageService$ = this.sessionStorageService.watchStorage().subscribe(() => this.setOrganisationData());
+    this.subscriptions.push(sessionStorageService$);
   }
 
   ngOnDestroy(): void {
@@ -53,7 +53,7 @@ export class OrgObjectsComponent implements OnInit {
   }
 
   setOrganisationData(): void {
-    this.userDetails = JSON.parse(this.localStorageService.getItem('userDetails'));
+    this.userDetails = JSON.parse(this.sessionStorageService.getItem('userDetails'));
 
     if (!this.userDetails) { return; }
 

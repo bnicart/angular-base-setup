@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { LocalStorageService } from '../services/local-storage.service';
+import { SessionStorageService } from '../services/session-storage.service';
 import { UserService } from '../services/custom/user.service';
 
 import { LoggedInUserDetails, Organisation } from '../models/logged-in-user-details.model';
@@ -18,12 +18,12 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private localStorageService: LocalStorageService,
+    private sessionStorageService: SessionStorageService,
     private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    const details = this.localStorageService.getItem('userDetails');
+    const details = this.sessionStorageService.getItem('userDetails');
     if (details) {
       this.setUserDetails(JSON.parse(details));
     } else {
@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
 
   setUserDetails(value: LoggedInUserDetails): void {
     this.userDetails = value;
-    this.localStorageService.setItem('userDetails', JSON.stringify(this.userDetails));
+    this.sessionStorageService.setItem('userDetails', JSON.stringify(this.userDetails));
   }
 
   setCurrentOrganisationLogo(organisation: Organisation): void {
