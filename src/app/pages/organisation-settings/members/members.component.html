@@ -26,10 +26,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="!filteredMembers(currentOrganisationData?.users).length">
+        <tr *ngIf="!filteredMembers(currentOrganisationUsers).length">
           <td colspan="4" class="text-center">No members found.</td>
         </tr>
-        <tr *ngFor="let member of filteredMembers(currentOrganisationData?.users)">
+        <tr *ngFor="let member of filteredMembers(currentOrganisationUsers)">
           <td>
             <!-- <img [src]="member.photo" alt="Member Photo" class="img-thumbnail" width="100"> -->
             {{ member.name }}

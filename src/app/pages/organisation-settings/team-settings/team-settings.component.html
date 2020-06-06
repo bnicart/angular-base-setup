@@ -25,10 +25,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="!filteredTeams(currentOrganisationData?.teams).length">
+        <tr *ngIf="!filteredTeams(currentOrganisationTeams).length">
           <td colspan="3" class="text-center">No teams found.</td>
         </tr>
-        <tr *ngFor="let team of filteredTeams(currentOrganisationData?.teams)">
+        <tr *ngFor="let team of filteredTeams(currentOrganisationTeams)">
           <td>
             {{ team.name }}
             <span class="badge badge-info" *ngIf="team.state === 'pending'">pending</span>

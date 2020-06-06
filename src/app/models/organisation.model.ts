@@ -1,5 +1,6 @@
 import { User } from './user.model';
 import { Team } from './team.model';
+import { OrganisationObject } from './organisation-object.model';
 
 export interface Organisation {
   id?: string;
@@ -7,4 +8,5 @@ export interface Organisation {
   logo?: string;
   users?: Array<User>;
   teams?: Array<Team>;
+  objects?: Array<OrganisationObject>;
 }

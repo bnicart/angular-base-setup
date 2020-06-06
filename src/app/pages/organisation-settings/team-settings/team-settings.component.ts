@@ -19,6 +19,7 @@ export class TeamSettingsComponent implements OnInit, OnDestroy {
   query = '';
   userDetails: User;
   currentOrganisationData: Organisation;
+  currentOrganisationTeams: Array<Team> = [];
   selectedTeam: Team = {};
 
   constructor(
@@ -44,6 +45,7 @@ export class TeamSettingsComponent implements OnInit, OnDestroy {
 
     this.organisationService.get(this.userDetails.currentOrganisation.id).subscribe((data: Organisation) => {
       this.currentOrganisationData = data;
+      this.currentOrganisationTeams = data.teams;
     });
   }
 

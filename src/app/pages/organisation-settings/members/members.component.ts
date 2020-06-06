@@ -23,6 +23,7 @@ export class MembersComponent implements OnInit, OnDestroy {
   currentOrganisationData: Organisation;
   currentOrganisationTeams: Array<Team> = [];
   currentOrganisationTeamsCopy: Array<Team> = [];
+  currentOrganisationUsers: Array<User> = [];
 
   constructor(
     private sessionStorageService: SessionStorageService,
@@ -48,6 +49,7 @@ export class MembersComponent implements OnInit, OnDestroy {
     this.organisationService.get(this.userDetails.currentOrganisation.id).subscribe((data: Organisation) => {
       this.currentOrganisationData = data;
       this.currentOrganisationTeams = Array.from(this.currentOrganisationData.teams).filter(team => team.state === 'active');
+      this.currentOrganisationUsers = data.users;
     });
   }
 

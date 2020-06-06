@@ -43,7 +43,6 @@ export class OrgObjectsComponent implements OnInit {
 
   ngOnInit() {
     this.setOrganisationData();
-    this.setOrganisationObjectData();
     const sessionStorageService$ = this.sessionStorageService.watchStorage().subscribe(() => this.setOrganisationData());
     this.subscriptions.push(sessionStorageService$);
   }
@@ -59,13 +58,8 @@ export class OrgObjectsComponent implements OnInit {
 
     this.organisationService.get(this.userDetails.currentOrganisation.id).subscribe((data: Organisation) => {
       this.currentOrganisationData = data;
+      this.currentOrganisationObjects = data.objects;
     });
-  }
-
-  setOrganisationObjectData(): void {
-    this.organisationObjectService.all().subscribe((data: Array<OrganisationObject>) => {
-      this.currentOrganisationObjects = data;
-    })
   }
 
   filteredOrgObjects(orgObjects: Array<OrganisationObject>): Array<OrganisationObject> {
@@ -90,7 +84,7 @@ export class OrgObjectsComponent implements OnInit {
   createOrgObject(data: Array<any>) {
     const params = this.getOrgObjectParams(data);
 
-    this.organisationObjectService.create(params).subscribe(() => this.setOrganisationObjectData());
+    this.organisationObjectService.create(params).subscribe(() => this.setOrganisationData());
   }
 
   updateOrgObject(data: Array<any>): void {
