@@ -26,6 +26,7 @@ export class OrgObjectsComponent implements OnInit {
 
   orgObjectConfigTypes = [
     { value: 'string', text: 'String' },
+    { value: 'password', text: 'Password' },
     { value: 'number', text: 'Number' },
     { value: 'date', text: 'Date' },
     { value: 'datetime', text: 'Date Time' },
@@ -113,7 +114,9 @@ export class OrgObjectsComponent implements OnInit {
   }
 
   setSelectedOrgObject(orgObject: OrganisationObject): void {
-    this.addConfig(orgObject);
+    if (!Array.isArray(orgObject.config)) {
+      this.addConfig(orgObject);
+    }
     this.selectedOrgObject = Object.assign({}, orgObject) as OrganisationObject;
   }
 
