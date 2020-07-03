@@ -75,16 +75,22 @@
     </div>
   </div>
 
+  <div class="row mb-1">
+    <div class="col-4 text-center font-weight-bold">Label</div>
+    <div class="col-4 text-center font-weight-bold">Type</div>
+    <div class="col-4 text-center font-weight-bold">State</div>
+  </div>
+
   <div class="row" *ngFor="let config of selectedOrgObject.config">
     <div class="col-4">
       <div class="form-group">
-        <label for="label">Label</label>
+        <!-- <label for="label">Label</label> -->
         <input type="text" class="form-control" name="username" [(ngModel)]="config.label">
       </div>
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="org-object-type">Type</label>
+        <!-- <label for="org-object-type">Type</label> -->
         <select class="form-control" name="type" [(ngModel)]="config.type">
           <option *ngFor="let option of orgObjectConfigTypes" [value]="option.value">{{ option.text }}</option>
         </select>
@@ -92,7 +98,7 @@
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="org-object-state">State</label>
+        <!-- <label for="org-object-state">State</label> -->
         <select class="form-control" name="state" [(ngModel)]="config.state">
           <option value="pending">Pending</option>
           <option value="active">Active</option>
@@ -105,7 +111,7 @@
 </app-modal>
 
 <!-- UPDATE ORG OBJECT MODAL -->
-<app-modal name="edit-org-object-modal" title="Edit Organigation Object" (saveClicked)="updateOrgObject($event)" (cancelClicked)="modalClosed()">
+<app-modal name="edit-org-object-modal" title="Edit Organisation Object" (saveClicked)="updateOrgObject($event)" (cancelClicked)="modalClosed()">
   <div class="form-group row">
     <div class="col-3">
       <label for="name">Name</label>
@@ -127,16 +133,22 @@
     </div>
   </div>
 
+  <div class="row mb-1">
+    <div class="col-4 text-center font-weight-bold">Label</div>
+    <div class="col-4 text-center font-weight-bold">Type</div>
+    <div class="col-4 text-center font-weight-bold">State</div>
+  </div>
+
   <div class="row" *ngFor="let config of selectedOrgObject.config">
     <div class="col-4">
       <div class="form-group">
-        <label for="label">Label</label>
+        <!-- <label for="label">Label</label> -->
         <input type="text" class="form-control" name="username" [(ngModel)]="config.label">
       </div>
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="org-object-type">Type</label>
+        <!-- <label for="org-object-type">Type</label> -->
         <select class="form-control" name="type" [(ngModel)]="config.type">
           <option *ngFor="let option of orgObjectConfigTypes" [value]="option.value">{{ option.text }}</option>
         </select>
@@ -144,7 +156,7 @@
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="org-object-state">State</label>
+        <!-- <label for="org-object-state">State</label> -->
         <select class="form-control" name="config_state" [(ngModel)]="config.state">
           <option value="pending">Pending</option>
           <option value="active">Active</option>
