@@ -20,17 +20,20 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>State</th>
           <th>Members</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngIf="!filteredTeams(currentOrganisationTeams).length">
-          <td colspan="3" class="text-center">No teams found.</td>
+          <td colspan="4" class="text-center">No teams found.</td>
         </tr>
         <tr *ngFor="let team of filteredTeams(currentOrganisationTeams)">
           <td>
             {{ team.name }}
+          </td>
+          <td>
             <span class="badge badge-info" *ngIf="team.state === 'pending'">pending</span>
             <span class="badge badge-warning" *ngIf="team.state === 'archived'">archived</span>
           </td>

@@ -20,6 +20,7 @@
       <thead>
         <tr>
           <th>Name</th>
+          <th>State</th>
           <th>Teams</th>
           <th>Permissions</th>
           <th>Actions</th>
@@ -27,12 +28,14 @@
       </thead>
       <tbody>
         <tr *ngIf="!filteredMembers(currentOrganisationUsers).length">
-          <td colspan="4" class="text-center">No members found.</td>
+          <td colspan="5" class="text-center">No members found.</td>
         </tr>
         <tr *ngFor="let member of filteredMembers(currentOrganisationUsers)">
           <td>
             <!-- <img [src]="member.photo" alt="Member Photo" class="img-thumbnail" width="100"> -->
             {{ member.name }}
+          </td>
+          <td>
             <span class="badge badge-info" *ngIf="member.state === 'pending'">pending</span>
             <span class="badge badge-warning" *ngIf="member.state === 'archived'">archived</span>
           </td>
