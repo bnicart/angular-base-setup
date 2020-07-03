@@ -2,6 +2,7 @@ $fa-font-path : "~@fortawesome/fontawesome-pro/webfonts";
 @import "~@fortawesome/fontawesome-pro/scss/fontawesome.scss";
 @import "~@fortawesome/fontawesome-pro/scss/regular.scss";
 @import "~@fortawesome/fontawesome-pro/scss/solid.scss";
+@import '~ngx-toastr/toastr';
 
 // Your variable overrides
 $primary: #24a87b;

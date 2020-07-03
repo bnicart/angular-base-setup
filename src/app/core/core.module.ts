@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgpSortModule } from 'ngp-sort-pipe';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { ToastrModule } from 'ngx-toastr';
 
 import { CoreRoutingModule } from './core-routing.module';
 
@@ -26,6 +28,7 @@ import { TokenInterceptor } from './services/token.interceptor';
     CommonModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
 
     // Core
     CoreRoutingModule,
@@ -33,23 +36,24 @@ import { TokenInterceptor } from './services/token.interceptor';
     // Plugins
     FontAwesomeModule,
     NgpSortModule,
-    LoadingBarHttpClientModule
+    LoadingBarHttpClientModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true
+    }),
   ],
-  exports: [
-    RouterModule,
-    NavbarComponent,
-  ],
+  exports: [RouterModule, NavbarComponent],
   declarations: [
     AppRootComponent,
     NavbarComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   providers: [
     AuthGuard,
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  ]
+  ],
 })
-export class CoreModule { }
+export class CoreModule {}

@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from './auth.service';
 import { camelizeKeys } from '../utils/camelize-keys';
@@ -16,7 +17,7 @@ import { camelizeKeys } from '../utils/camelize-keys';
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private toastr: ToastrService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
@@ -31,7 +32,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
         if (error.status === 401) {
-          window.alert('You are unauthorized to do this action!');
+          this.toastr.warning('You are unauthorized to do this action!');
           this.authService.logout();
         }
         if (error.error instanceof ErrorEvent) {
@@ -41,7 +42,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           // server-side error
           errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.data.errors.message}`;
         }
-        window.alert(errorMessage);
+        this.toastr.error(errorMessage);
         return throwError(errorMessage);
       }),
       map((event: HttpEvent<any>) => {
